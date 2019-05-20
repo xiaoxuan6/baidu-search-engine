@@ -1,0 +1,35 @@
+{
+    "name": "james.xue/baidu-search-engine",
+    "description": "百度搜索引擎提交",
+    "type": "library",
+    "keywords":
+    [
+        "baidu",
+        "search",
+        "engine",
+        "baidu-search",
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "james.xue",
+            "email": "1527736751@qq.com"
+        }
+    ],
+    "require": {
+        "GuzzleHttp/Client": "~6.0",
+        "laravel/framework": "5.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "James\\BaiduSearch\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "James\\BaiduSearch\\BaiduSearchServiceProvider"
+            ]
+        }
+    }
+}
