@@ -7,7 +7,7 @@
         "baidu",
         "search",
         "engine",
-        "baidu-search",
+        "baidu-search"
     ],
     "license": "MIT",
     "authors": [
@@ -17,7 +17,6 @@
         }
     ],
     "require": {
-        "GuzzleHttp/Client": "~6.0",
         "laravel/framework": "5.4.*"
     },
     "autoload": {

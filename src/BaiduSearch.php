@@ -33,23 +33,49 @@ class BaiduSearch
      * error 	是 	        int 	错误码，与状态码相同
      * message 	是 	        string 	错误描述
      */
-    public function run(array $params = [])
+    public function run($params)
     {
+        $params = is_array($params) ? $params : (array)$params;
+
         $url = sprintf(self::URL , config('baidu.site'), config('baidu.token'));
 
         $data = implode("\n", $params);
-        $client = new Client();
-        $response = $client->request('POST', $url, [
-            'body' => $data
-        ]);
 
-        $result = json_decode($response->getBody()->getContents() , 1);
-        if (isset($result['success'])) {
-            return true;
-        } else {
-            $message = isset($result['message']) ? $result['message'] : '未知错误';
-            Log::error('baidu-search：'.json_encode($message, JSON_UNESCAPED_UNICODE));
-            return false;
-        }
+        $ch = curl_init();
+        $options =  array(
+            CURLOPT_URL => $url,
+            CURLOPT_POST => true,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POSTFIELDS => implode("\n", $data),
+            CURLOPT_HTTPHEADER => array('Content-Type: text/plain'),
+        );
+        curl_setopt_array($ch, $options);
+        $result = curl_exec($ch);
+        $result = json_decode($result, 1);
+
+        if(isset($result['error']))
+            return $this->message(401, $result['message']);
+        elseif(!empty($result->not_same_site))
+            return $this->message(401, '由于不是本站url而未处理的url列表');
+        elseif(!empty($result->not_valid))
+            return $this->message(401, '不合法的url列表');
+        else
+            return $this->message(200, '推送成功', $result['remain']);
+    }
+
+    /**
+     * Notes:
+     * Date: 2019/6/4 16:46
+     * @param int $code
+     * @param string $message
+     * @return array
+     */
+    protected function message($code = 200, $message = '', $remain = '')
+    {
+        return [
+            'code' => $code,
+            'message' => $message,
+            'remain' => $remain,
+        ];
     }
 }
