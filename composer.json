@@ -9,6 +9,7 @@
         "engine",
         "baidu-search"
     ],
+    "homepage": "https://github.com/xiaoxuan6/baidu-search-engine.git",
     "license": "MIT",
     "authors": [
         {
@@ -16,9 +17,6 @@
             "email": "1527736751@qq.com"
         }
     ],
-    "require": {
-        "laravel/framework": "5.4.*"
-    },
     "autoload": {
         "psr-4": {
             "James\\BaiduSearch\\": "src/"
