@@ -143,13 +143,13 @@ class BaiduSearch
                 'message' => $result['message'],
                 'remain' => '',
             ];
-        } elseif(!empty($result->not_same_site)){
+        } elseif(!empty($result['not_same_site'])){
             return [
                 'code' => 401,
                 'message' => '由于不是本站url而未处理的url列表',
                 'remain' => '',
             ];
-        } elseif(!empty($result->not_valid)){
+        } elseif(!empty($result['not_valid'])){
             return [
                 'code' => 401,
                 'message' => '不合法的url列表',
