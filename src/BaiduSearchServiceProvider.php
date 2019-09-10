@@ -13,7 +13,7 @@ class BaiduSearchServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->publishes([__DIR__.'/../config/baidu.php' => config_path('baidu.php')], 'config');
+        $this->publishes([__DIR__.'/../config/baidu.php' => config_path('baidu.php')], 'baidu');
 
     }
 
