@@ -42,7 +42,7 @@ class BaiduSearchServiceProvider extends ServiceProvider
             return new BaiduSearch();
         });
 
-        $this->app->aliases(BaiduSearch::class , 'BaiduSearch');
+        $this->app->alias(BaiduSearch::class , 'BaiduSearch');
     }
 
     /**
