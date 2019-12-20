@@ -5,8 +5,11 @@ This package can be installed through Composer.
 ```
 composer require james.xue/baidu-search-engine
 ```
+
 ## 添加服务
 在config/app.php文件中添加服务
+
+###添加 service provider（optional. if laravel < 5.5）
 
 ~~~
 'providers' => [
@@ -14,6 +17,16 @@ composer require james.xue/baidu-search-engine
     James\BaiduSearch\BaiduSearchServiceProvider::class
 ]
 ~~~
+
+### 添加 alias（optional. if laravel < 5.5）
+
+```
+'aliases' => [
+    ...
+    "BaiduSearch": "James\BaiduSearch\Facades\BaiduSearch::class"
+],
+`
+```
 
 ## 发布扩展文件
 

@@ -11,9 +11,23 @@ use Illuminate\Support\ServiceProvider;
 
 class BaiduSearchServiceProvider extends ServiceProvider
 {
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = true;
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
     public function boot()
     {
-        $this->publishes([__DIR__.'/../config/baidu.php' => config_path('baidu.php')], 'baidu');
+        $this->publishes([
+            __DIR__.'/../config/baidu.php' => config_path('baidu.php')
+        ], 'baidu');
 
     }
 
@@ -28,6 +42,16 @@ class BaiduSearchServiceProvider extends ServiceProvider
             return new BaiduSearch();
         });
 
-        class_alias ( '\James\BaiduSearch\Facades\BaiduSearch' , 'BaiduSearch');
+        $this->app->aliases(BaiduSearch::class , 'BaiduSearch');
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ["BaiduSearch"];
     }
 }
